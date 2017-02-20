@@ -48,19 +48,9 @@ logger := logrus.New()
 logger.Hooks.Add(hook)
 ```
 
-### Add topics
+### Topic
 
-```Go
-l := logger.WithField("topics", []string{"topic_1", "topic_2", "topic_3"})
-```
-
-The field name must be ***topics***.
-
-If only one topic needed, then
-
-```Go
-l := logger.WithField("topics", []string{"topic_1"})
-```
+For only one topic pass the Kafka topic name as the Id.
 
 ### Send messages to logger
 
