@@ -1,25 +1,25 @@
 package logrus_kafka_hook
 
 import (
+	"log"
+	"time"
+
 	"github.com/Shopify/sarama"
 	"github.com/Sirupsen/logrus"
-	"time"
-	"log"
-	"errors"
 )
 
 type KafkaHook struct {
 	// Id of the hook
-	id        string
+	id string
 
 	// Log levels allowed
-	levels    []logrus.Level
+	levels []logrus.Level
 
 	// Log entry formatter
 	formatter logrus.Formatter
 
 	// sarama.AsyncProducer
-	producer  sarama.AsyncProducer
+	producer sarama.AsyncProducer
 }
 
 // Create a new KafkaHook.
@@ -77,17 +77,6 @@ func (hook *KafkaHook) Fire(entry *logrus.Entry) error {
 
 	partitionKey = sarama.ByteEncoder(b)
 
-	// Check topics
-	var topics []string
-
-	if ts, ok := entry.Data["topics"]; ok {
-		if topics, ok = ts.([]string); !ok {
-			return errors.New("Field topics must be []string")
-		}
-	} else {
-		return errors.New("Field topics not found")
-	}
-
 	// Format before writing
 	b, err = hook.formatter.Format(entry)
 
@@ -97,12 +86,10 @@ func (hook *KafkaHook) Fire(entry *logrus.Entry) error {
 
 	value := sarama.ByteEncoder(b)
 
-	for _, topic := range topics {
-		hook.producer.Input() <- &sarama.ProducerMessage{
-			Key:   partitionKey,
-			Topic: topic,
-			Value: value,
-		}
+	hook.producer.Input() <- &sarama.ProducerMessage{
+		Key:   partitionKey,
+		Topic: hook.Id(),
+		Value: value,
 	}
 
 	return nil
