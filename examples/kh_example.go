@@ -1,15 +1,16 @@
 package main
 
 import (
-	lkh "github.com/gfremex/logrus-kafka-hook"
-	"github.com/Sirupsen/logrus"
 	"time"
+
+	"github.com/Sirupsen/logrus"
+	lkh "github.com/gfremex/logrus-kafka-hook"
 )
 
 func main() {
 	// Create a new KafkaHook
 	hook, err := lkh.NewKafkaHook(
-		"kh",
+		"topic_1",
 		[]logrus.Level{logrus.InfoLevel, logrus.WarnLevel, logrus.ErrorLevel},
 		&logrus.JSONFormatter{},
 		[]string{"192.168.60.5:9092", "192.168.60.6:9092", "192.168.60.7:9092"},
@@ -24,9 +25,6 @@ func main() {
 
 	// Add hook to logger
 	logger.Hooks.Add(hook)
-
-	// Add topics
-	l := logger.WithField("topics", []string{"topic_1", "topic_2", "topic_3"})
 
 	// Send message to logger
 	l.Debug("This must not be logged")
