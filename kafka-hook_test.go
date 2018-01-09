@@ -1,8 +1,8 @@
 package logrus_kafka_hook
 
 import (
+	"github.com/sirupsen/logrus"
 	"testing"
-	"github.com/Sirupsen/logrus"
 	"time"
 )
 

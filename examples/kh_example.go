@@ -2,7 +2,7 @@ package main
 
 import (
 	lkh "github.com/gfremex/logrus-kafka-hook"
-	"github.com/Sirupsen/logrus"
+	"github.com/sirupsen/logrus"
 	"time"
 )
 

@@ -1,25 +1,25 @@
 package logrus_kafka_hook
 
 import (
-	"github.com/Shopify/sarama"
-	"github.com/Sirupsen/logrus"
-	"time"
-	"log"
 	"errors"
+	"github.com/Shopify/sarama"
+	"github.com/sirupsen/logrus"
+	"log"
+	"time"
 )
 
 type KafkaHook struct {
 	// Id of the hook
-	id        string
+	id string
 
 	// Log levels allowed
-	levels    []logrus.Level
+	levels []logrus.Level
 
 	// Log entry formatter
 	formatter logrus.Formatter
 
 	// sarama.AsyncProducer
-	producer  sarama.AsyncProducer
+	producer sarama.AsyncProducer
 }
 
 // Create a new KafkaHook.

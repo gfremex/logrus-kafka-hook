@@ -1,7 +1,7 @@
 ## logrus-kafka-hook
 
 
-A [logrus.Hook](https://godoc.org/github.com/Sirupsen/logrus#Hook) which sends a single
+A [logrus.Hook](https://godoc.org/github.com/sirupsen/logrus#Hook) which sends a single
 log entry to multiple kafka topics simultaneously.
 
 ## How to use
@@ -19,8 +19,8 @@ NewKafkaHook(id string, levels []logrus.Level, formatter logrus.Formatter, broke
 ```
 
 - id: Hook Id
-- levels: [logrus.Levels](https://godoc.org/github.com/Sirupsen/logrus#Level) supported by the hook
-- formatter: [logrus.Formatter](https://godoc.org/github.com/Sirupsen/logrus#Formatter) used by the hook
+- levels: [logrus.Levels](https://godoc.org/github.com/sirupsen/logrus#Level) supported by the hook
+- formatter: [logrus.Formatter](https://godoc.org/github.com/sirupsen/logrus#Formatter) used by the hook
 - brokers: Kafka brokers
 
 For example:
@@ -34,7 +34,7 @@ hook, err := lkh.NewKafkaHook(
 	)
 ```
 
-### Create a [logrus.Logger](https://godoc.org/github.com/Sirupsen/logrus#Logger)
+### Create a [logrus.Logger](https://godoc.org/github.com/sirupsen/logrus#Logger)
 
 For example:
 
